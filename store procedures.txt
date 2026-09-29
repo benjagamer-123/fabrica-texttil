@@ -1,0 +1,77 @@
+msotrar datos
+
+
+DELIMITER //
+
+CREATE PROCEDURE mostrar(IN nombre_tabla VARCHAR(64))
+BEGIN
+    SET @sql_query = CONCAT('SELECT * FROM ', nombre_tabla);
+    PREPARE stmt FROM @sql_query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END //
+
+DELIMITER ;
+
+
+ eliminar datos
+
+
+DELIMITER //
+
+CREATE PROCEDURE sp_eliminar_por_id(
+    IN p_nombre_tabla VARCHAR(64), 
+    IN p_id INT
+)
+BEGIN
+    SET @sql_query = CONCAT('DELETE FROM ', p_nombre_tabla, ' WHERE id = ?');
+    
+    PREPARE stmt FROM @sql_query;
+    SET @id_param = p_id;
+    EXECUTE stmt USING @id_param;
+    DEALLOCATE PREPARE stmt;
+END //
+
+DELIMITER ;
+
+insertar datos
+
+DELIMITER //
+
+CREATE PROCEDURE sp_insertar_dinamico(
+    IN p_nombre_tabla VARCHAR(64), 
+    IN p_columnas TEXT, 
+    IN p_valores TEXT    
+)
+BEGIN
+    -- Ejemplo: INSERT INTO usuarios (nombre, email) VALUES ('Juan', 'juan@email.com')
+    SET @sql_query = CONCAT('INSERT INTO ', p_nombre_tabla, ' (', p_columnas, ') VALUES (', p_valores, ')');
+    
+    PREPARE stmt FROM @sql_query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END //
+
+DELIMITER ;
+
+
+actualizar datos
+
+DELIMITER //
+
+CREATE PROCEDURE sp_actualizar_dinamico(
+    IN p_nombre_tabla VARCHAR(64), 
+    IN p_valores_set TEXT, 
+    IN p_id INT
+)
+BEGIN
+    -- Ejemplo: UPDATE productos SET precio = 1500, stock = 20 WHERE id = 3
+    SET @sql_query = CONCAT('UPDATE ', p_nombre_tabla, ' SET ', p_valores_set, ' WHERE id = ?');
+    
+    PREPARE stmt FROM @sql_query;
+    SET @id_param = p_id;
+    EXECUTE stmt USING @id_param;
+    DEALLOCATE PREPARE stmt;
+END //
+
+DELIMITER ;
