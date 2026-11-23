@@ -1,0 +1,5955 @@
+{
+  "info": {
+    "_postman_id": "abbf87a4-2b98-4c91-9131-716dbfc181a5",
+    "name": "Proyecto Escuela - Servlets API",
+    "description": "Coleccion generada automaticamente: todos los servlets CRUD, login, diagnostico y Admin API. Variables: baseUrl, id, adminEmail, adminPassword.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59088377",
+    "_collection_link": "https://go.postman.co/collection/59088377-abbf87a4-2b98-4c91-9131-716dbfc181a5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "00 - Autenticacion y diagnostico",
+      "item": [
+        {
+          "name": "POST - Login admin (crea sesion)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 200\", function () { pm.response.to.have.status(200); });",
+                  "var j = pm.response.json();",
+                  "pm.test(\"Login correcto\", function () { pm.expect(j.success).to.eql(true); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?action=login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "login"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Test conexion BD",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/testdb",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "testdb"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Home",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/home",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "home"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "01 - GET (consultas)",
+      "item": [
+        {
+          "name": "GET - Listar Auditoria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auditoria?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Auditoria por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auditoria?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar CategoriaProducto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categoriaproducto?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categoriaproducto"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar CategoriaProducto por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categoriaproducto?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categoriaproducto"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Cliente por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar ConsumoMateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/consumomateriaprima?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumomateriaprima"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar ConsumoMateriaPrima por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/consumomateriaprima?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumomateriaprima"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Deposito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/deposito?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposito"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Deposito por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/deposito?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposito"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Despacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/despacho?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "despacho"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Despacho por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/despacho?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "despacho"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar DetalleDespacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalledespacho?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalledespacho"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar DetalleDespacho por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalledespacho?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalledespacho"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar DetalleOrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordencompra?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordencompra"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar DetalleOrdenCompra por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordencompra?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordencompra"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar DetalleOrdenProd",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordenprod?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordenprod"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar DetalleOrdenProd por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordenprod?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordenprod"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar DetallePedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detallepedido?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detallepedido"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar DetallePedido por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detallepedido?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detallepedido"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar EtapaProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/etapaproduccion?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "etapaproduccion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar EtapaProduccion por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/etapaproduccion?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "etapaproduccion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Inventario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/inventario?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Inventario por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/inventario?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Lote",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/lote?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lote"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Lote por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/lote?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lote"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar MateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/materiaprima?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materiaprima"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar MateriaPrima por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/materiaprima?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materiaprima"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar OrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar OrdenCompra por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar OrdenProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar OrdenProduccion por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Pais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pais?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pais"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Pais por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pais?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pais"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Pedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pedido?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Pedido por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pedido?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Permiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/permiso?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "permiso"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Permiso por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/permiso?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "permiso"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Producto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/producto?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Producto por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/producto?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Proveedor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/proveedor?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "proveedor"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Proveedor por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/proveedor?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "proveedor"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar RedRelacion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrelacion?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrelacion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar RedRelacion por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrelacion?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrelacion"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar RedRolPermiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrolpermiso?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrolpermiso"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar RedRolPermiso por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrolpermiso?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrolpermiso"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Rol",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rol?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rol"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Rol por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rol?action=buscar&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rol"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "buscar"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?action=list",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar Usuario por ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?action=find&id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "find"
+                },
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - POST (altas)",
+      "item": [
+        {
+          "name": "POST - Registrar Auditoria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tabla_afectada\": \"Postman\",\n  \"accion\": \"Postman\",\n  \"detalle_anterior\": \"Postman\",\n  \"detalle_nuevo\": \"Postman\",\n  \"ip_origen\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auditoria",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditoria"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar CategoriaProducto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categoriaproducto",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categoriaproducto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razon_social\": \"Prueba Postman\",\n  \"cuit\": \"20-12345678-9\",\n  \"tipo_cliente\": \"Postman\",\n  \"email\": \"prueba@test.com\",\n  \"telefono\": \"Postman\",\n  \"direccion\": \"Postman\",\n  \"ciudad\": \"Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cliente",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar ConsumoMateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cantidad_utilizada\": 1.5,\n  \"lote\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consumomateriaprima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumomateriaprima"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Deposito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba Postman\",\n  \"ubicacion\": \"Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/deposito",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposito"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Despacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha_despacho\": \"2026-11-22 10:00:00\",\n  \"transportista\": \"Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/despacho",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "despacho"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar DetalleDespacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cantidad\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalledespacho",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalledespacho"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar DetalleOrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cantidad\": 1.5,\n  \"precio_unitario\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalleordencompra",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordencompra"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar DetalleOrdenProd",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cantidad_plan\": 1.5,\n  \"tiempo_unitario_est\": 1.5,\n  \"tiempo_total_est\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalleordenprod",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordenprod"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar DetallePedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cantidad\": 1.5,\n  \"precio_unitario\": 1.5,\n  \"descuento\": 1.5,\n  \"subtotal\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detallepedido",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detallepedido"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar EtapaProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre_etapa\": \"Prueba Postman\",\n  \"orden_secuencia\": 1,\n  \"estado\": \"Activo\",\n  \"fecha_inicio_real\": \"2026-11-22 10:00:00\",\n  \"fecha_fin_real\": \"2026-11-22 10:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/etapaproduccion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "etapaproduccion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Inventario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lote\": \"Postman\",\n  \"cantidad_disponible\": 1.5,\n  \"unidad_medida\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Lote",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ordenProduccion\": { \"id_orden_prod\": 1 },\n  \"nombreEtapa\": \"Etapa Postman\",\n  \"ordenSecuencia\": 99,\n  \"estado\": \"Pendiente\",\n  \"fechaInicioReal\": \"2026-11-22T10:00:00\",\n  \"fechaFinReal\": \"2026-11-22T11:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/lote",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lote"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar MateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PM-001\",\n  \"nombre\": \"Prueba Postman\",\n  \"tipo\": \"Postman\",\n  \"unidad_medida\": \"Postman\",\n  \"stock_minimo\": 1.5,\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/materiaprima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materiaprima"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar OrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha_orden\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"total_estimado\": 1.5,\n  \"precio\": 1.5,\n  \"cantidad\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar OrdenProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numero_orden\": \"Postman\",\n  \"fecha_inicio_est\": \"2026-11-22 10:00:00\",\n  \"fecha_fin_est\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"observaciones\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Pais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba Postman\",\n  \"codigo_iso\": \"PM-001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pais",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pais"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Pedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fecha_pedido\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"fecha_entrega_req\": \"2026-11-22 10:00:00\",\n  \"observaciones\": \"Generado por la coleccion Postman\",\n  \"total_estimado\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pedido",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Permiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/permiso",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "permiso"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Producto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PM-001\",\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\",\n  \"unidad_medida\": \"Postman\",\n  \"tipo\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/producto",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Proveedor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"razon_social\": \"Prueba Postman\",\n  \"cuit\": \"20-12345678-9\",\n  \"contacto\": \"Postman\",\n  \"email\": \"prueba@test.com\",\n  \"telefono\": \"Postman\",\n  \"direccion\": \"Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proveedor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "proveedor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar RedRelacion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolPadre\": { \"id_rol\": 1 },\n  \"rolHijo\": { \"id_rol\": 2 }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/redrelacion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrelacion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar RedRolPermiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rol\": { \"id_rol\": 1 },\n  \"permiso\": { \"idPermisos\": 1 }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/redrolpermiso",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrolpermiso"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Rol",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rol",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rol"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Registrar Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?action=add",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "add"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - PUT (modificaciones)",
+      "item": [
+        {
+          "name": "PUT - Modificar Auditoria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_auditoria\": \"{{id}}\",\n  \"id_usuario\": \"{{id}}\",\n  \"tabla_afectada\": \"Postman\",\n  \"id_registro\": \"{{id}}\",\n  \"accion\": \"Postman\",\n  \"detalle_anterior\": \"Postman\",\n  \"detalle_nuevo\": \"Postman\",\n  \"ip_origen\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auditoria",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditoria"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar CategoriaProducto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_categoria\": \"{{id}}\",\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categoriaproducto",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categoriaproducto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_cliente\": \"{{id}}\",\n  \"razon_social\": \"Prueba Postman\",\n  \"cuit\": \"20-12345678-9\",\n  \"tipo_cliente\": \"Postman\",\n  \"email\": \"prueba@test.com\",\n  \"telefono\": \"Postman\",\n  \"direccion\": \"Postman\",\n  \"ciudad\": \"Postman\",\n  \"id_pais\": \"{{id}}\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cliente",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar ConsumoMateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_consumo\": \"{{id}}\",\n  \"id_etapa\": \"{{id}}\",\n  \"id_materia_prima\": \"{{id}}\",\n  \"cantidad_utilizada\": 1.5,\n  \"lote\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consumomateriaprima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumomateriaprima"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Deposito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_deposito\": \"{{id}}\",\n  \"nombre\": \"Prueba Postman\",\n  \"ubicacion\": \"Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/deposito",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposito"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Despacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_despacho\": \"{{id}}\",\n  \"fecha_despacho\": \"2026-11-22 10:00:00\",\n  \"id_pedido\": \"{{id}}\",\n  \"transportista\": \"Postman\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/despacho",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "despacho"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar DetalleDespacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_detalle_despacho\": \"{{id}}\",\n  \"id_despacho\": \"{{id}}\",\n  \"id_producto\": \"{{id}}\",\n  \"cantidad\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalledespacho",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalledespacho"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar DetalleOrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_detalle_compra\": \"{{id}}\",\n  \"id_orden_compra\": \"{{id}}\",\n  \"id_materia_prima\": \"{{id}}\",\n  \"cantidad\": 1.5,\n  \"precio_unitario\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalleordencompra",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordencompra"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar DetalleOrdenProd",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_detalle_orden_prod\": \"{{id}}\",\n  \"id_orden_prod\": \"{{id}}\",\n  \"id_producto\": \"{{id}}\",\n  \"cantidad_plan\": 1.5,\n  \"tiempo_unitario_est\": 1.5,\n  \"tiempo_total_est\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detalleordenprod",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordenprod"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar DetallePedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_detalle_pedido\": \"{{id}}\",\n  \"id_pedido\": \"{{id}}\",\n  \"id_producto\": \"{{id}}\",\n  \"cantidad\": 1.5,\n  \"precio_unitario\": 1.5,\n  \"descuento\": 1.5,\n  \"subtotal\": 1.5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/detallepedido",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detallepedido"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar EtapaProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_etapa\": \"{{id}}\",\n  \"id_orden_prod\": \"{{id}}\",\n  \"nombre_etapa\": \"Prueba Postman\",\n  \"orden_secuencia\": 1,\n  \"estado\": \"Activo\",\n  \"fecha_inicio_real\": \"2026-11-22 10:00:00\",\n  \"fecha_fin_real\": \"2026-11-22 10:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/etapaproduccion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "etapaproduccion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Inventario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_inventario\": \"{{id}}\",\n  \"id_producto\": \"{{id}}\",\n  \"id_deposito\": \"{{id}}\",\n  \"lote\": \"Postman\",\n  \"cantidad_disponible\": 1.5,\n  \"unidad_medida\": \"Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Lote",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ordenProduccion\": { \"id_orden_prod\": 1 },\n  \"nombreEtapa\": \"Etapa Postman\",\n  \"ordenSecuencia\": 99,\n  \"estado\": \"Pendiente\",\n  \"fechaInicioReal\": \"2026-11-22T10:00:00\",\n  \"fechaFinReal\": \"2026-11-22T11:00:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/lote",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lote"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar MateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_materia_prima\": \"{{id}}\",\n  \"codigo\": \"PM-001\",\n  \"nombre\": \"Prueba Postman\",\n  \"tipo\": \"Postman\",\n  \"unidad_medida\": \"Postman\",\n  \"stock_minimo\": 1.5,\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/materiaprima",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materiaprima"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar OrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_orden_compra\": \"{{id}}\",\n  \"fecha_orden\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"id_proveedor\": \"{{id}}\",\n  \"total_estimado\": 1.5,\n  \"precio\": 1.5,\n  \"cantidad\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar OrdenProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_orden_prod\": \"{{id}}\",\n  \"numero_orden\": \"Postman\",\n  \"fecha_inicio_est\": \"2026-11-22 10:00:00\",\n  \"fecha_fin_est\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"id_responsable\": \"{{id}}\",\n  \"observaciones\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Pais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_pais\": \"{{id}}\",\n  \"nombre\": \"Prueba Postman\",\n  \"codigo_iso\": \"PM-001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pais",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pais"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Pedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_pedido\": \"{{id}}\",\n  \"id_cliente\": \"{{id}}\",\n  \"fecha_pedido\": \"2026-11-22 10:00:00\",\n  \"estado\": \"Activo\",\n  \"fecha_entrega_req\": \"2026-11-22 10:00:00\",\n  \"observaciones\": \"Generado por la coleccion Postman\",\n  \"total_estimado\": 1.5,\n  \"id_producto\": \"{{id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pedido",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Permiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idPermisos\": \"{{id}}\",\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/permiso",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "permiso"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Producto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_producto\": \"{{id}}\",\n  \"codigo\": \"PM-001\",\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\",\n  \"unidad_medida\": \"Postman\",\n  \"tipo\": \"Postman\",\n  \"id_categoria\": \"{{id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/producto",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Proveedor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_proveedor\": \"{{id}}\",\n  \"razon_social\": \"Prueba Postman\",\n  \"cuit\": \"20-12345678-9\",\n  \"contacto\": \"Postman\",\n  \"email\": \"prueba@test.com\",\n  \"telefono\": \"Postman\",\n  \"direccion\": \"Postman\",\n  \"id_pais\": \"{{id}}\",\n  \"estado\": \"Activo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proveedor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "proveedor"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar RedRelacion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rolPadre\": { \"id_rol\": 1 },\n  \"rolHijo\": { \"id_rol\": 2 }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/redrelacion",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrelacion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar RedRolPermiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rol\": { \"id_rol\": 1 },\n  \"permiso\": { \"idPermisos\": 1 }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/redrolpermiso",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrolpermiso"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Rol",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_rol\": \"{{id}}\",\n  \"nombre\": \"Prueba Postman\",\n  \"descripcion\": \"Generado por la coleccion Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rol",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rol"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modificar Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - PATCH (actualizaciones parciales)",
+      "item": [
+        {
+          "name": "PATCH - Inventario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/inventario?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - OrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - OrdenProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Pedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pedido?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Producto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/producto?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Cambiar estado de Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?id={{id}}&estado=Inactivo",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                },
+                {
+                  "key": "estado",
+                  "value": "Inactivo"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 - DELETE (bajas)",
+      "item": [
+        {
+          "name": "DELETE - Eliminar Auditoria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auditoria?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auditoria"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar CategoriaProducto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categoriaproducto?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categoriaproducto"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Cliente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cliente?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cliente"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar ConsumoMateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/consumomateriaprima?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumomateriaprima"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Deposito",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/deposito?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposito"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Despacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/despacho?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "despacho"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar DetalleDespacho",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalledespacho?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalledespacho"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar DetalleOrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordencompra?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordencompra"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar DetalleOrdenProd",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detalleordenprod?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detalleordenprod"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar DetallePedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/detallepedido?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "detallepedido"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar EtapaProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/etapaproduccion?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "etapaproduccion"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Inventario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/inventario?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inventario"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Lote",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/lote?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lote"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar MateriaPrima",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/materiaprima?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "materiaprima"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar OrdenCompra",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordencompra?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordencompra"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar OrdenProduccion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ordenproduccion?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ordenproduccion"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Pais",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pais?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pais"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Pedido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pedido?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pedido"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Permiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/permiso?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "permiso"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Producto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/producto?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "producto"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Proveedor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/proveedor?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "proveedor"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar RedRelacion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrelacion?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrelacion"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar RedRolPermiso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/redrolpermiso?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "redrolpermiso"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Rol",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rol?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rol"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar Usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario?id={{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 - Admin API (requiere login admin)",
+      "item": [
+        {
+          "name": "GET - Admin: tablas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=tables",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "tables"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Admin: esquema de productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=schema&table=productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "schema"
+                },
+                {
+                  "key": "table",
+                  "value": "productos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Admin: listar productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=list&table=productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list"
+                },
+                {
+                  "key": "table",
+                  "value": "productos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Admin: insertar en productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"values\":{\"codigo\":\"ADM-PM-001\",\"nombre\":\"Producto Admin Postman\",\"id_categoria\":1,\"unidad_medida\":\"Unidad\",\"tipo\":\"Terminado\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=insert&table=productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "insert"
+                },
+                {
+                  "key": "table",
+                  "value": "productos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Admin: actualizar productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"pk\":{\"id_producto\":\"{{id}}\"},\"values\":{\"nombre\":\"Producto Admin Modificado\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=update&table=productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "update"
+                },
+                {
+                  "key": "table",
+                  "value": "productos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Admin: eliminar de productos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Estado 2xx\", function () { pm.response.to.be.success; });",
+                  "pm.test(\"Cuerpo JSON\", function () { pm.response.to.be.json; });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"pk\":{\"id_producto\":\"{{id}}\"}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/api?action=delete&table=productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "api"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "delete"
+                },
+                {
+                  "key": "table",
+                  "value": "productos"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/proyecto_escuela"
+    },
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "adminEmail",
+      "value": "ejemplo@gmail.com"
+    },
+    {
+      "key": "adminPassword",
+      "value": "123123"
+    }
+  ]
+}
